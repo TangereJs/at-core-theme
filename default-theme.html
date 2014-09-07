@@ -1,0 +1,47 @@
+<link rel="import" href="at-core-theme.html">
+
+<script>
+
+  Platform.mixin(CoreStyle.g.theme, {
+    colorOne: '#abcdef',
+    colorThree: '#224433'
+  });
+
+</script>
+
+<at-core-theme id="default">
+  body {
+    font-family: sans-serif;
+    background-color: {{g.theme.colorOne}};
+  }
+
+  html /deep/ core-menu {
+  margin: 0px;
+  }
+
+  paper-toggle-button::shadow paper-radio-button::shadow #ink[checked] {
+    color: red;
+  }
+
+  paper-toggle-button::shadow paper-radio-button::shadow #onRadio {
+   background-color: {{g.theme.colorTwo}};
+  }
+
+  paper-toggle-button::shadow #toggleBar[checked] {
+    background-color: green;
+  }
+
+  paper-toggle-button::shadow paper-radio-button::shadow #ink {
+    color: red;
+  }
+
+  paper-toggle-button::shadow paper-radio-button::shadow #offRadio {
+    border-color: {{g.theme.colorTwo}};
+  }
+
+  paper-toggle-button::shadow #toggleBar {
+    background-color: green;
+  }
+
+
+</at-core-theme>

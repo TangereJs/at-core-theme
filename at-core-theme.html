@@ -1,0 +1,179 @@
+<!--
+Copyright (c) 2014 adenin TECHNOLOGIES. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+Based on code from core-style.html
+-->
+<!--
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+
+<polymer-element name="at-core-theme" hidden>
+  <script>
+    (function () {
+
+      // share g with core-style
+      window.CoreStyle = window.CoreStyle || {
+        g: {},
+        list: {},
+        refMap: {}
+      };
+
+      // initialize default theme values
+      if (!window.CoreStyle.g.theme) {
+        window.CoreStyle.g.theme = {};
+        var t = window.CoreStyle.g.theme;
+        t.colorTwo = '#123456';
+      }
+
+      Polymer('at-core-theme', {
+
+        // static
+        g: CoreStyle.g,        
+        list: CoreStyle.list,
+
+        ready: function () {
+            this.provide();
+            this.require();
+        },
+
+
+        provide: function () {
+          this.register();
+          // we want to do this asap, especially so we can do so before definitions
+          // that use this core-style are registered.
+          if (this.textContent) {
+            this._completeProvide();
+          } else {
+            this.async(this._completeProvide);
+          }
+        },
+
+        register: function () {
+          var i = this.list[this.id];
+          if (i) {
+            if (!Array.isArray(i)) {
+              this.list[this.id] = [i];
+            }
+            this.list[this.id].push(this);
+          } else {
+            this.list[this.id] = this;
+          }
+        },
+
+        // stamp into a shadowRoot so we can monitor dom of the bound output
+        _completeProvide: function () {
+          this.createShadowRoot();
+          this.domObserver = new MutationObserver(this.domModified.bind(this))
+              .observe(this.shadowRoot, {
+                subtree: true,
+                characterData: true, childList: true
+              });
+          this.provideContent();
+        },
+
+        provideContent: function () {
+          this.ensureTemplate();
+          this.shadowRoot.textContent = '';
+          this.shadowRoot.appendChild(this.instanceTemplate(this.template));
+          this.cssText = this.shadowRoot.textContent;
+        },
+
+        ensureTemplate: function () {
+          if (!this.template) {
+            this.template = this.querySelector('template:not([repeat]):not([bind])');
+            // move content into the template
+            if (!this.template) {
+              this.template = document.createElement('template');
+              var n = this.firstChild;
+              while (n) {
+                this.template.content.appendChild(n.cloneNode(true));
+                n = n.nextSibling;
+              }
+            }
+          }
+        },
+
+        domModified: function () {
+          this.cssText = this.shadowRoot.textContent;
+          this.require(); // update style definition
+        },
+
+
+        require: function () {
+          var cssText = this.cssTextForRef(this.id);
+          //console.log('require', this.ref, this.id, cssText);
+
+          if (cssText) {
+            this.ensureStyleElement();
+            // do nothing if cssText has not changed
+            if (this.styleElement._cssText === cssText) {
+              return;
+            }
+
+            this.styleElement._cssText = cssText;
+            if (window.ShadowDOMPolyfill) {
+              this.styleElement.textContent = cssText;
+              cssText = Platform.ShadowCSS.shimStyle(this.styleElement, "");
+            }
+            this.styleElement.textContent = cssText;
+          }
+        },
+
+        cssTextForRef: function (ref) {
+          var s$ = this.byId(ref);
+
+          var cssText = '';
+          if (s$) {
+            if (Array.isArray(s$)) {
+              var p = [];
+              for (var i = 0, l = s$.length, s; (i < l) && (s = s$[i]) ; i++) {
+                p.push(s.cssText);
+              }
+              cssText = p.join('\n\n');
+            } else {
+              cssText = s$.cssText;
+            }
+          }
+          if (s$ && !cssText) {
+            console.warn('No styles provided for ref:', ref);
+          }
+          return cssText;
+        },
+
+        byId: function (id) {
+          return this.list[id];
+        },
+
+        ensureStyleElement: function () {
+          if (!this.styleElement) {
+            this.styleElement = this.makeShimStyle();
+          }
+          if (!this.styleElement) {
+            console.warn(this.localName, 'could not setup style.');
+          }
+        },
+
+        makeShimStyle: function () {
+          var name = "id";
+          var style = document.querySelector('style[' + name + '=theme' + this.id + ']');
+          if (!style) {
+            style = document.createElement('style');
+            style.setAttribute(name, "theme" + this.id);
+            document.head.appendChild(style);
+          }
+          return style;
+        }
+
+      });
+
+
+    })();
+  </script>
+</polymer-element>
