@@ -3,45 +3,22 @@
 <script>
 
   Platform.mixin(CoreStyle.g.theme, {
-    colorOne: '#abcdef',
-    colorThree: '#224433'
+    brandColor: '#ff0000'  // sample for additional variables
   });
 
 </script>
 
-<at-core-theme id="default">
-  body {
-    font-family: sans-serif;
-    background-color: {{g.theme.colorOne}};
+<at-core-theme id="default" palette="red/light-green">
+
+  html /deep/ #section {
+  background-image: inherit;
+  background-color: white !important;
   }
 
-  html /deep/ core-menu {
-  margin: 0px;
-  }
 
-  paper-toggle-button::shadow paper-radio-button::shadow #ink[checked] {
-    color: red;
+  html /deep/ #core_toolbar {
+  color: rgb(255, 255, 255);
+  background-color: {{g.theme.primaryColor}};
   }
-
-  paper-toggle-button::shadow paper-radio-button::shadow #onRadio {
-   background-color: {{g.theme.colorTwo}};
-  }
-
-  paper-toggle-button::shadow #toggleBar[checked] {
-    background-color: green;
-  }
-
-  paper-toggle-button::shadow paper-radio-button::shadow #ink {
-    color: red;
-  }
-
-  paper-toggle-button::shadow paper-radio-button::shadow #offRadio {
-    border-color: {{g.theme.colorTwo}};
-  }
-
-  paper-toggle-button::shadow #toggleBar {
-    background-color: green;
-  }
-
 
 </at-core-theme>

@@ -7,29 +7,20 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <script src="../platform/platform.js"></script>
+  <script src="../webcomponentsjs/webcomponents.js"></script>
 
-  <link rel="import" href="../paper-toggle-button/paper-toggle-button.html">
-  <link rel="import" href="../font-roboto/roboto.html">
+  <link rel="import" href="../core-icon-button/core-icon-button.html">
+  <link rel="import" href="../core-toolbar/core-toolbar.html">
+  <link rel="import" href="../core-header-panel/core-header-panel.html">
+  <link rel="import" href="../paper-button/paper-button.html">
+  <link rel="import" href="../paper-checkbox/paper-checkbox.html">
+  <link rel="import" href="../core-icons/core-icons.html">
+  <link rel="import" href="../core-icons/av-icons.html">
+  <link rel="import" href="../paper-fab/paper-fab.html">
 
   <link rel="import" href="default-theme.html">
 
   <style shim-shadowdom>
-    body {
-      font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
-      margin: 0;
-      padding: 24px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      -webkit-tap-highlight-color: rgba(0,0,0,0);
-      -webkit-touch-callout: none;
-    }
-
-    section {
-      width: 200px;
-    }
 
     paper-toggle-button.blue::shadow paper-radio-button::shadow #ink[checked] {
       color: #4285f4;
@@ -45,24 +36,87 @@
   </style>
 
 </head>
+  <polymer-element name="my-element">
+
+  <template>
+    <style>    
+      :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      #core_header_panel {
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        position: relative;
+      }
+      #core_toolbar {
+        color: rgb(255, 255, 255);
+        xbackground-color: rgb(79, 125, 201);
+      }
+      #section {
+        height: 1000px;
+        background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+      }
+      #paper_button {
+        position: relative;
+      }
+      #paper_button1 {
+        position: relative;
+      }
+      #paper_checkbox {
+        display: block;
+        position: relative;
+      }
+      #paper_fab {
+        position: absolute;
+      }
+    </style>
+    <core-header-panel mode="standard" id="core_header_panel">
+      <core-toolbar id="core_toolbar">
+        <core-icon-button icon="menu" id="core_icon_button"></core-icon-button>
+        <div id="div">Header</div>
+      </core-toolbar>
+      <section id="section">
+            <div id="typography">
+                <div class="display-4">display-4</div>
+                <div class="display-3">display-3</div>
+                <div class="display-2">display-2</div>
+                <div class="display-1">display-1</div>
+                <div class="headline">headline</div>
+                <div class="subhead-2">subhead-2</div>
+                <div class="subhead-1">subhead-1</div>
+                <div class="title">title</div>
+                <div class="body-2">body-2</div>
+                <div class="body-1">body-1</div>
+                <div class="caption">caption</div>
+                <div class="menu">menu</div>
+                <div class="button">button</div>
+            </div>
+        <paper-button id="paper_button" start-justified>button</paper-button>
+        <paper-button id="paper_button1" start-justified>button</paper-button>
+        <paper-checkbox checked label="click me" id="paper_checkbox"></paper-checkbox>
+        <paper-fab icon="av:play-arrow" id="paper_fab"></paper-fab>
+      </section>
+    </core-header-panel>
+  </template>
+
+  <script>
+
+    Polymer({
+      
+    });
+
+  </script>
+
+</polymer-element>
+  
 <body unresolved>
 
-  <section>
-
-    <div center horizontal layout>
-      <div flex>Wi-Fi</div>
-      <paper-toggle-button checked></paper-toggle-button>
-    </div>
-
-    <br>
-    <br>
-
-    <div center horizontal layout>
-      <div flex>Bluetooth</div>
-      <paper-toggle-button class="blue"></paper-toggle-button>
-    </div>
-
-  </section>
+<my-element></my-element>
 
 </body>
 </html>
