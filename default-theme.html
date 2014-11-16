@@ -3,22 +3,22 @@
 <script>
 
   Platform.mixin(CoreStyle.g.theme, {
-    brandColor: '#ff0000'  // sample for additional variables
+    brandColor: '#ff0000'  // sample for additional variables    
   });
 
 </script>
 
 <at-core-theme id="default" palette="red/light-green">
-
+  
   html /deep/ #section {
-  background-image: inherit;
-  background-color: white !important;
+    background-image: inherit;
+    background-color: white !important;
   }
 
-
-  html /deep/ #core_toolbar {
-  color: rgb(255, 255, 255);
-  background-color: {{g.theme.primaryColor}};
+  
+  html /deep/ core-toolbar {
+    color: rgb(255, 255, 255);
+    background-color: {{g.theme.primaryColor}};
   }
 
 </at-core-theme>

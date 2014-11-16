@@ -12,7 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../polymer/polymer.html">
-<link rel="stylesheet" href="at-core-theme.css" no-shim>
+<link rel="import" href="../font-roboto/roboto.html">
 
 <polymer-element name="at-core-theme" hidden attributes="palette">
   <script>
@@ -197,88 +197,78 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         generateTypographicCSS: function () {
 
-          var font_family = '"Segoe UI", "Roboto","Helvetica Neue",Arial,sans-serif';
+          var font_family = '"XSegoe UI", "Helvetica Neue", "RobotoDraft", Arial,sans-serif';
 
-          var sizings = {
-            // Line height and margin are defined on a 4px guide
-            // Name			Size	   L-h	Margin	Thick. Tracking	Device	Comp. CSS	Selectors
-            'display-4': ['112px', 30, 14, 300, -10, false, false, false],
-            'display-3': ['56px', 16, 12, 400, -5, false, false, false],
-            'display-2': ['45px', 12, 8, 400, 0, false, false, ['h1']],
-            'display-1': ['34px', 10, 7, 400, 0, false, false, ['h2']],
-            'headline': ['24px', 8, 7, 400, 0, false, false, ['h3']],
-            'subhead-2': ['15px', 7, 8, 500, 10, '16px', false, false],
-            'subhead-1': ['15px', 6, 8, 400, 10, '16px', false, ['.head']],
-            'title': ['20px', 6, 8, 500, 5, false, false, false],
-            'body-2': ['13px', 6, 6, 500, 10, '14px', false, false],
-            'body-1': ['13px', 5, 5, 400, 10, '14px', false, ['body', 'p']],
-            'caption': ['12px', 4, 4, 400, 20, false, false, false],
-            'menu': ['14px', 4, 0, 500, 10, false, false, false],
-            'button': ['14px', 4, 0, 400, 10, false, 'text-transform: uppercase;', ['[button]']]
-          };
-
+		  var sizings = {
+			// Line height and margin are defined on a 4px grid
+			// Name			0:Size	   1:Lh	2:Mrgin	3:Wei 4:Trcking	5:Ls    6:Opa 7:Devce  8:Comp.CSS	9:Selectors
+			'display-4':	['112px',  30,	14,		300,   -10,		-0.04,  0.54, false,   false,		false],
+			'display-3':	['56px',   16,	12,		400,	-5,		-0.02,  0.54, false,   false,		['h1']],
+			'display-2':	['45px',   12,	8,		400,	 0,		0,      0.54, false,   false,		['h2']],
+			'display-1':	['34px',   10,	7,		400,	 0,		0,      0.54, false,   false,		['h3']],
+			'headline':		['24px',	8,	7,		400,	 0,		0,      0.87, false,   false,		['h4']],
+			'title':		['20px',	6,	8,		500,	 5,		0.02,   0.87, false,   false,		['h5']],
+            'subhead-2':	['15px',	7,	8,		500,	10,		0.04,   0.87, '16px',  false,		false],
+			'subhead-1':	['15px',	6,	8,		400,	10,		0.04,   0.87, '16px',  false,		['h6']],			
+			'body-2':		['13px',	6,	6,		500,	10,		0.04,   0.87, '14px',  false,		false],
+			'body-1':		['13px',	5,	5,		400,	10,		0.04,   0.87, '14px',  false,		['body','p']],
+			'caption':		['12px',	4,	4,		400,	20,		0.08,   0.54, false,   false,		false],
+			'menu':			['14px',	4,	0,		500,	10,		0.04,   0.87, false,   false,		false],
+			'button':		['14px',	4,	0,		400,	10,		0.04,   0.87, false,   'text-transform: uppercase;', 	['[button]']]
+		  };
 
           var css = 'body{font-family:' + font_family + '}\n';
           css += 'b,strong{font-weight:500;}\n';
 
           var devices_css = '@media screen and (max-width: 991px){\n';
-
+          var opacity = '';
           var sizing_css = '';
+          
           for (sizing in sizings) {
             if (sizings.hasOwnProperty(sizing)) {
+              
+              sizing_css = selectors(sizing,"",sizings[sizing][9]);
 
-              sizing_css = 'html /deep/ .' + sizing;
-              sizing_css += sizings[sizing][7] ? ',' + sizings[sizing][7].join() : '';
-
-              if (sizings[sizing][5]) {
-                devices_css += sizing_css + '{font-size:' + sizings[sizing][5] + '}\n';
+              if (sizings[sizing][7]) {
+                devices_css += sizing_css + '{font-size:' + sizings[sizing][7] + '}\n';
               }
+              
+              opacity +=  selectors(sizing,".bg-light",sizings[sizing][9]) + '{opacity:' + sizings[sizing][6] + '}\n';
 
-              sizing_css += '{';
+              sizing_css += ' {';
               sizing_css += 'font-size:' + sizings[sizing][0] + ';';
               sizing_css += 'line-height:' + sizings[sizing][1] * 4 + 'px;';
               sizing_css += 'font-weight:' + sizings[sizing][3] + ';';
-              sizing_css += sizings[sizing][6] ? sizings[sizing][6] : '';
+              if(sizings[sizing][5] != 0) sizing_css += 'letter-spacing:' + sizings[sizing][5] + 'em;';
+              sizing_css += sizings[sizing][8] ? sizings[sizing][8] : '';
               sizing_css += 'margin:0;';
               sizing_css += '}\n';
 
               css += sizing_css;
             }
           }
+          
           devices_css += '}\n';
 
-          var margins = [];
-          var pushMargin = function (selector, sizing) {
-            margins.push([selector, Number(sizing[0].replace(/\D/g, '')), sizing[1], sizing[2]]);
-          }
-          for (sizing in sizings) {
-            if (sizings.hasOwnProperty(sizing)) {
-              pushMargin('html /deep/ .' + sizing, sizings[sizing]);
-              if (sizings[sizing][7]) {
-                for (var i = sizings[sizing][7].length - 1; i >= 0; i--) {
-                  if (sizings[sizing][7][i] != 'body') {
-                    pushMargin(sizings[sizing][7][i], sizings[sizing]);
-                  }
-                }
+          return css + devices_css + opacity;
+          
+          function selectors(name,container,arr) {
+            
+            if(container > "") container += " ";
+            var s = 'html /deep/ ' + container + '.' + name;
+            
+            // array of additional selectors
+            if(arr) {
+            for(i=0;i<arr.length;i++) {
+              var se = arr[i];
+              if(se != "body") {
+                se = "html /deep/ " + container + se;
               }
+              s += "," + se;
             }
-          }
-
-          var margins_css = '';
-          var marginer = function (element) {
-            var element_bottom_blank = (element[2] * 4) - ((element[2] * 4) - element[1]) * 0.5 - (element[1] * 0.85);
-            var margin = (element[3] * 4) - element_bottom_blank;
-            margin = Math.round(margin / 4) * 4;
-            if (margin > 0) {
-              margins_css += element[0] + '{margin-bottom:' + margin + 'px;}\n';
             }
+            return s;
           }
-          for (var i = margins.length - 1; i >= 0; i--) {
-            marginer(margins[i]);
-          }
-
-
-          return css + devices_css + margins_css;
         },
 
         initTheme: function () {
