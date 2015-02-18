@@ -31,6 +31,10 @@
         g: CoreStyle.g,
         list: CoreStyle.list,
 
+        
+        attached: function() {
+          this.themeChanged();
+        },
         ready: function () {
           this.themeChanged();
 
@@ -48,7 +52,13 @@
           var url = "/components/at-core-theme/dist/" + this.theme + "/semantic.css";
           var cssref = document.getElementById("at-core-theme");
 
-          if (!cssref) {
+          if (!cssref) {            
+            
+            var style = document.createElement('style');
+            style.textContent = '.fouc-initial-hide { opacity: 0; display: block; overflow: hidden; } \n';
+            var head = document.querySelector('head');
+            head.insertBefore(style, head.firstChild);
+            
             cssref = document.createElement("link");
             cssref.setAttribute("rel", "stylesheet");
             cssref.setAttribute("type", "text/css");

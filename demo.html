@@ -19,7 +19,11 @@
   <link rel="import" href="../paper-fab/paper-fab.html">
   <link rel="import" href="at-core-theme.html">
 
-  <at-core-theme></at-core-theme>
+  <style>
+  .fouc {
+    background-color: red;
+  }
+  </style>
   
   <style shim-shadowdom>
 
@@ -76,27 +80,14 @@
         position: absolute;
       }
     </style>
+    <at-core-theme></at-core-theme>
     <core-header-panel mode="standard" id="core_header_panel">
       <core-toolbar id="core_toolbar2">
         <core-icon-button icon="menu" id="core_icon_button"></core-icon-button>
         <div id="div">Header</div>
       </core-toolbar>
       <section id="section">
-            <div id="typography">
-                <div class="display-4">display-4</div>
-                <div class="display-3">display-3</div>
-                <div class="display-2">display-2</div>
-                <div class="display-1">display-1</div>
-                <div class="headline">headline</div>
-                <div class="subhead-2">subhead-2</div>
-                <div class="subhead-1">subhead-1</div>
-                <div class="title">title</div>
-                <div class="body-2">body-2</div>
-                <div class="body-1">body-1</div>
-                <div class="caption">caption</div>
-                <div class="menu">menu</div>
-                <div class="button">button</div>
-            </div>
+
         <paper-button id="paper_button" start-justified>button</paper-button>
         <paper-button id="paper_button1" start-justified>button</paper-button>
         <paper-checkbox checked label="click me" id="paper_checkbox"></paper-checkbox>
@@ -115,7 +106,7 @@
 
 </polymer-element>
   
-<body unresolved>
+<body unresolved class="fouc-initial-hide">
 
 <my-element></my-element>
 
