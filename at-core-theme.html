@@ -31,8 +31,8 @@
         g: CoreStyle.g,
         list: CoreStyle.list,
 
-        
-        attached: function() {
+
+        attached: function () {
           this.themeChanged();
         },
         ready: function () {
@@ -43,28 +43,31 @@
         themeChanged: function () {
 
           // is theme already loaded?
-          if(window.CoreStyle.g.theme.name == this.theme) return;
-          if(window.CoreStyle.g.theme.name && !this.theme) return;
-          
+          if (window.CoreStyle.g.theme.name == this.theme) return;
+          if (window.CoreStyle.g.theme.name && !this.theme) return;
+
           // set default theme name
-          if(!this.theme) this.theme = "carbon";
-          
-          var url = "/components/at-core-theme/dist/" + this.theme + "/semantic.css";
+          if (!this.theme) this.theme = "carbon";
+
+          var url = "/components/";
+          if (window.ComponentsBase != undefined) url = window.ComponentsBase;
+          url += "at-core-theme/dist/" + this.theme + "/semantic.css";
+
           var cssref = document.getElementById("at-core-theme");
 
-          if (!cssref) {            
-            
+          if (!cssref) {
+
             var style = document.createElement('style');
             style.textContent = '.fouc-initial-hide { opacity: 0; display: block; overflow: hidden; } \n';
             var head = document.querySelector('head');
             head.insertBefore(style, head.firstChild);
-            
+
             cssref = document.createElement("link");
             cssref.setAttribute("rel", "stylesheet");
             cssref.setAttribute("type", "text/css");
             cssref.setAttribute("id", "at-core-theme");
             cssref.setAttribute("href", url);
-            cssref.setAttribute("shim-shadowdom","");
+            cssref.setAttribute("shim-shadowdom", "");
             document.getElementsByTagName("head")[0].appendChild(cssref);
 
           } else {
