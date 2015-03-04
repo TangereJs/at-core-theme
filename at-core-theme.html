@@ -20,24 +20,28 @@
       }
 
 
-      Polymer('at-core-theme', {
-        publish: {
+      Polymer({
+
+        is: 'at-core-theme',
+        published: {
           theme: {
-            value: '',
-            reflect: true
+            type: String,
+            readOnly: true
           }
         },
+        configure: function () {
+          // return default values of properties
+          return {
+            theme: 'carbon'            
+          };
+        },
+        
         // static
         g: CoreStyle.g,
         list: CoreStyle.list,
 
-
-        attached: function () {
+        ready: function () { 
           this.themeChanged();
-        },
-        ready: function () {
-          this.themeChanged();
-
         },
 
         themeChanged: function () {
