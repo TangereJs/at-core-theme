@@ -23,19 +23,12 @@
       Polymer({
 
         is: 'at-core-theme',
-        published: {
+        properties: {
           theme: {
-            type: String,
-            readOnly: true
+            type: String,            
+            value: 'carbon'
           }
         },
-        configure: function () {
-          // return default values of properties
-          return {
-            theme: 'carbon'            
-          };
-        },
-        
         // static
         g: CoreStyle.g,
         list: CoreStyle.list,
@@ -49,9 +42,6 @@
           // is theme already loaded?
           if (window.CoreStyle.g.theme.name == this.theme) return;
           if (window.CoreStyle.g.theme.name && !this.theme) return;
-
-          // set default theme name
-          if (!this.theme) this.theme = "carbon";
 
           var url = "/components/";
           if (window.ComponentsBase != undefined) url = window.ComponentsBase;
