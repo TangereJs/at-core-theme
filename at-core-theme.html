@@ -1,0 +1,78 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<script>
+  (function () {
+
+    // share g with core-style
+    window.CoreStyle = window.CoreStyle || {
+      g: {},
+      list: {},
+      refMap: {}
+    };
+
+    // initialize default theme values
+    if (!window.CoreStyle.g.theme) {
+      window.CoreStyle.g.theme = {};
+      var t = window.CoreStyle.g.theme;
+      t.colorTwo = '#123456';
+    }
+
+
+    Polymer({
+
+      is: 'at-core-theme',
+      properties: {
+        theme: {
+          type: String,
+          value: 'carbon'
+        }
+      },
+      // static
+      g: CoreStyle.g,
+      list: CoreStyle.list,
+
+      ready: function () {
+        this.themeChanged();
+      },
+
+      themeChanged: function () {
+
+        // is theme already loaded?
+        if (window.CoreStyle.g.theme.name == this.theme) return;
+        if (window.CoreStyle.g.theme.name && !this.theme) return;
+
+        var url = "/components/";
+        if (window.ComponentsBase != undefined) url = window.ComponentsBase;
+        url += "at-core-theme/dist/" + this.theme + "/semantic.css";
+
+        var cssref = document.getElementById("at-core-theme");
+
+        if (!cssref) {
+
+          var style = document.createElement('style');
+          style.textContent = '.fouc-initial-hide { opacity: 0; display: block; overflow: hidden; } \n';
+          var head = document.querySelector('head');
+          head.insertBefore(style, head.firstChild);
+
+          cssref = document.createElement("link");
+          cssref.setAttribute("rel", "stylesheet");
+          cssref.setAttribute("type", "text/css");
+          cssref.setAttribute("id", "at-core-theme");
+          cssref.setAttribute("href", url);
+          //cssref.setAttribute("shim-shadowdom", "");
+          document.getElementsByTagName("head")[0].appendChild(cssref);
+
+        } else {
+          cssref.setAttribute("href", url);
+        }
+
+        console.log("theme changed to: " + this.theme);
+        window.CoreStyle.g.theme.name = this.theme;
+      }
+
+    });
+
+  })();
+</script>
+
+
