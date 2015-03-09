@@ -43,7 +43,9 @@
 
         var url = "/components/";
         if (window.ComponentsBase != undefined) url = window.ComponentsBase;
-        url += "at-core-theme/dist/" + this.theme + "/semantic.css";
+        url += "at-core-theme/dist/" + this.theme + "/semantic";
+        if(Polymer.Settings.useShadow) url += "-deep";
+        url += ".css";
 
         var cssref = document.getElementById("at-core-theme");
 
