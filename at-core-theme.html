@@ -52,7 +52,8 @@
         if (!cssref) {
 
           var style = document.createElement('style');
-          style.textContent = '.fouc-initial-hide { opacity: 0; display: block; overflow: hidden; } \n';
+          style.textContent = '.themed, [themed] { opacity: 0; display: block; overflow: hidden; } \n' +
+                              '[unresolved], html /deep/ unresolved { opacity: 0; display: block; overflow: hidden; } \n';
           var head = document.querySelector('head');
           head.insertBefore(style, head.firstChild);
 
@@ -63,6 +64,9 @@
           cssref.setAttribute("href", url);
           //cssref.setAttribute("shim-shadowdom", "");
           document.getElementsByTagName("head")[0].appendChild(cssref);
+          
+          // remove unresolved from body, now per element [unresolved] is setup
+          document.body.removeAttribute('unresolved');
 
         } else {
           cssref.setAttribute("href", url);

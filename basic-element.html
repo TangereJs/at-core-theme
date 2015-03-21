@@ -34,7 +34,10 @@
 
 <script>
   Polymer({
-    is: "basic-element"
+    is: "basic-element",
+    ready: function() {
+      this.removeAttribute('unresolved');
+    }
   });
 </script>
 
