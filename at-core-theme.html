@@ -44,7 +44,7 @@
         var url = "/components/";
         if (window.ComponentsBase != undefined) url = window.ComponentsBase;
         url += "at-core-theme/dist/" + this.theme + "/semantic";
-        if(Polymer.Settings.useShadow) url += "-deep";
+        if (Polymer.Settings.useShadow) url += "-deep";
         url += ".css";
 
         var cssref = document.getElementById("at-core-theme");
@@ -53,7 +53,7 @@
 
           var style = document.createElement('style');
           style.textContent = '.themed, [themed] { opacity: 0; display: block; overflow: hidden; } \n' +
-                              '[unresolved], html /deep/ unresolved { opacity: 0; display: block; overflow: hidden; } \n';
+            '[unresolved], html /deep/ unresolved { opacity: 0; display: block; overflow: hidden; } \n';
           var head = document.querySelector('head');
           head.insertBefore(style, head.firstChild);
 
@@ -62,9 +62,15 @@
           cssref.setAttribute("type", "text/css");
           cssref.setAttribute("id", "at-core-theme");
           cssref.setAttribute("href", url);
-          //cssref.setAttribute("shim-shadowdom", "");
-          document.getElementsByTagName("head")[0].appendChild(cssref);
-          
+
+          // ensure that at-core-theme is first element in head, so that classes can still be overwritten as needed
+          var h = document.getElementsByTagName("head")[0];
+          if (!h.children.length) {
+            h.appendChild(cssref);
+          } else {
+            h.insertBefore(cssref, h.firstChild);
+          }
+
           // remove unresolved from body, now per element [unresolved] is setup
           document.body.removeAttribute('unresolved');
 
