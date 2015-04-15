@@ -52,7 +52,7 @@
         if (!cssref) {
 
           var style = document.createElement('style');
-          style.textContent = '.themed, [themed] { opacity: 0; display: block; overflow: hidden; } \n' +
+          style.textContent = '.themed, [themed] { opacity: 0; display: block; } \n' +
             '[unresolved], html /deep/ unresolved { opacity: 0; display: block; overflow: hidden; } \n';
           var head = document.querySelector('head');
           head.insertBefore(style, head.firstChild);
