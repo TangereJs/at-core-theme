@@ -304,14 +304,14 @@ htmldeep .ui.card > .content .header {
 }
 htmldeep .ui.cards > .card > .content > .header:not(.ui),
 htmldeep .ui.card > .content > .header:not(.ui) {
-  font-weight: lighter;
+  font-weight: 100;
   font-size: 2rem;
   margin-top: -0.25em;
   line-height: 1.33em;
 }
 htmldeep .ui.cards > .card > .content .header .counter,
 htmldeep .ui.card > .content .header .counter {
-  font-weight: lighter;
+  font-weight: 100;
   font-size: 3.66rem;
   margin: 4px 4px 4px 16px;
 }
@@ -358,7 +358,7 @@ htmldeep .ui.card .avatar img {
 htmldeep .ui.cards > .card > .content > .description,
 htmldeep .ui.card > .content > .description {
   clear: both;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.8);
 }
 htmldeep .ui.cards > .card > .content p,
 htmldeep .ui.card > .content p {
@@ -500,7 +500,7 @@ htmldeep .ui.card .item {
   padding: 0.75em 1em;
   top: 0em;
   left: 0em;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.85);
   box-shadow: none;
   -webkit-transition: color 0.2s ease;
           transition: color 0.2s ease;
@@ -508,7 +508,7 @@ htmldeep .ui.card .item {
 }
 htmldeep .ui.cards > .card .item a,
 htmldeep .ui.card .item a {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.85);
 }
 htmldeep .ui.cards > .card .item a:hover,
 htmldeep .ui.card .item a:hover {

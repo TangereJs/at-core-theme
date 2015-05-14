@@ -15363,7 +15363,7 @@ html  .ui.card > .content .header {
 
 html  .ui.cards > .card > .content > .header:not(.ui),
 html  .ui.card > .content > .header:not(.ui) {
-  font-weight: lighter;
+  font-weight: 100;
   font-size: 2rem;
   margin-top: -0.25em;
   line-height: 1.33em;
@@ -15371,7 +15371,7 @@ html  .ui.card > .content > .header:not(.ui) {
 
 html  .ui.cards > .card > .content .header .counter,
 html  .ui.card > .content .header .counter {
-  font-weight: lighter;
+  font-weight: 100;
   font-size: 3.66rem;
   margin: 4px 4px 4px 16px;
 }
@@ -15427,7 +15427,7 @@ html  .ui.card .avatar img {
 html  .ui.cards > .card > .content > .description,
 html  .ui.card > .content > .description {
   clear: both;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 html  .ui.cards > .card > .content p,
@@ -15593,7 +15593,7 @@ html  .ui.card .item {
   padding: 0.75em 1em;
   top: 0em;
   left: 0em;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.85);
   box-shadow: none;
   -webkit-transition: color 0.2s ease;
   transition: color 0.2s ease;
@@ -15602,7 +15602,7 @@ html  .ui.card .item {
 
 html  .ui.cards > .card .item a,
 html  .ui.card .item a {
-  color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.85);
 }
 
 html  .ui.cards > .card .item a:hover,
