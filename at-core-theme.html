@@ -53,7 +53,7 @@
 
           var style = document.createElement('style');
           style.textContent = '.themed, [themed] { opacity: 0; display: block; } \n' +
-            '[unresolved], html /deep/ unresolved { opacity: 0; display: block; overflow: hidden; } \n';
+            '[loading], html /deep/ loading { opacity: 0; display: block; overflow: hidden; } \n';
           var head = document.querySelector('head');
           head.insertBefore(style, head.firstChild);
 
@@ -71,8 +71,8 @@
             h.insertBefore(cssref, h.firstChild);
           }
 
-          // remove unresolved from body, now per element [unresolved] is setup
-          document.body.removeAttribute('unresolved');
+          // remove loading from body, now themed hides body until css is loaded
+          document.body.removeAttribute('loading');
 
         } else {
           cssref.setAttribute("href", url);
