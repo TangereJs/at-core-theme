@@ -36,7 +36,9 @@
       },
 
       themeChanged: function () {
-
+        if (true) {
+          return; // semantic ui theming not used any longer, at-core-theme obsolete for now
+        }
         // is theme already loaded?
         if (window.CoreStyle.g.theme.name == this.theme) return;
         if (window.CoreStyle.g.theme.name && !this.theme) return;
@@ -53,7 +55,7 @@
 
           var style = document.createElement('style');
           style.textContent = '.themed, [themed] { opacity: 0; display: block; } \n' +
-            '[loading], html /deep/ loading { opacity: 0; display: block; overflow: hidden; } \n';
+            '[loading] { opacity: 0; display: block; overflow: hidden; } \n';
           var head = document.querySelector('head');
           head.insertBefore(style, head.firstChild);
 
