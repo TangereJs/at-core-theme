@@ -2,7 +2,7 @@
   "name": "at-core-theme",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#master"
+    "tangere": "TangereJs/tangere#0.8-preview"
   },
   "version": "0.0.1.29"
 }
