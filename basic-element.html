@@ -1,5 +1,4 @@
-<link rel="import" href="../polymer/polymer.html">
-
+<link rel="import" href="../tangere/tangere.html">
 
 <dom-module id="basic-element">
   <template>
@@ -34,7 +33,9 @@
 
 <script>
   Polymer({
-    is: "basic-element"
+    is: "basic-element",
+    ready: function() {
+      this.removeAttribute('unresolved');
+    }
   });
 </script>
-

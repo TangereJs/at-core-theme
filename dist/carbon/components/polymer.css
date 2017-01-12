@@ -15,7 +15,7 @@
             Polymer
 *******************************/
 
-html /deep/ {
+htmldeep {
   
 
 /*******************************
@@ -29,17 +29,26 @@ html /deep/ {
 *******************************/
 
 }
-html /deep/ #section {
+htmldeep #section {
   background-image: inherit;
   background-color: white !important;
 }
-html /deep/ core-toolbar {
+htmldeep at-app-scaffold .bar {
   color: #ffffff;
+  -webkit-transition: background-color 0.5s ease;
+          transition: background-color 0.5s ease;
   background-color: #2979ff;
 }
+htmldeep .noscroll {
+  overflow: hidden;
+}
+htmldeep .ui.progress-bar {
+  background-color: #3c763d;
+}
 /*** avoid FOUC until this CSS is loaded ***/
-.fouc-initial-hide {
+.themed,
+[themed] {
   -webkit-transition: opacity ease-in 0.2s;
           transition: opacity ease-in 0.2s;
-  opacity: 1;
+  opacity: 1 !important;
 }

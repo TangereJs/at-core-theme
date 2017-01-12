@@ -1,85 +1,90 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../tangere/tangere.html">
+
+<script>
+  (function () {
+
+    // share g with core-style
+    window.CoreStyle = window.CoreStyle || {
+      g: {},
+      list: {},
+      refMap: {}
+    };
+
+    // initialize default theme values
+    if (!window.CoreStyle.g.theme) {
+      window.CoreStyle.g.theme = {};
+      var t = window.CoreStyle.g.theme;
+      t.colorTwo = '#123456';
+    }
 
 
-<polymer-element name="at-core-theme" hidden attributes="palette">
-  <script>
-    (function () {
+    Polymer({
 
-      // share g with core-style
-      window.CoreStyle = window.CoreStyle || {
-        g: {},
-        list: {},
-        refMap: {}
-      };
+      is: 'at-core-theme',
+      properties: {
+        theme: {
+          type: String,
+          value: 'carbon'
+        }
+      },
+      // static
+      g: CoreStyle.g,
+      list: CoreStyle.list,
 
-      // initialize default theme values
-      if (!window.CoreStyle.g.theme) {
-        window.CoreStyle.g.theme = {};
-        var t = window.CoreStyle.g.theme;
-        t.colorTwo = '#123456';
-      }
+      ready: function () {
+        this.themeChanged();
+      },
 
+      themeChanged: function () {
+        if (true) {
+          return; // semantic ui theming not used any longer, at-core-theme obsolete for now
+        }
+        // is theme already loaded?
+        if (window.CoreStyle.g.theme.name == this.theme) return;
+        if (window.CoreStyle.g.theme.name && !this.theme) return;
 
-      Polymer('at-core-theme', {
-        publish: {
-          theme: {
-            value: '',
-            reflect: true
-          }
-        },
-        // static
-        g: CoreStyle.g,
-        list: CoreStyle.list,
+        var url = "/components/";
+        if (window.ComponentsBase != undefined) url = window.ComponentsBase;
+        url += "at-core-theme/dist/" + this.theme + "/semantic";
+        if (Polymer.Settings.useShadow) url += "-deep";
+        url += ".css";
 
+        var cssref = document.getElementById("at-core-theme");
 
-        attached: function () {
-          this.themeChanged();
-        },
-        ready: function () {
-          this.themeChanged();
+        if (!cssref) {
 
-        },
+          var style = document.createElement('style');
+          style.textContent = '.themed, [themed] { opacity: 0; display: block; } \n' +
+            '[loading] { opacity: 0; display: block; overflow: hidden; } \n';
+          var head = document.querySelector('head');
+          head.insertBefore(style, head.firstChild);
 
-        themeChanged: function () {
+          cssref = document.createElement("link");
+          cssref.setAttribute("rel", "stylesheet");
+          cssref.setAttribute("type", "text/css");
+          cssref.setAttribute("id", "at-core-theme");
+          cssref.setAttribute("href", url);
 
-          // is theme already loaded?
-          if (window.CoreStyle.g.theme.name == this.theme) return;
-          if (window.CoreStyle.g.theme.name && !this.theme) return;
-
-          // set default theme name
-          if (!this.theme) this.theme = "carbon";
-
-          var url = "/components/";
-          if (window.ComponentsBase != undefined) url = window.ComponentsBase;
-          url += "at-core-theme/dist/" + this.theme + "/semantic.css";
-
-          var cssref = document.getElementById("at-core-theme");
-
-          if (!cssref) {
-
-            var style = document.createElement('style');
-            style.textContent = '.fouc-initial-hide { opacity: 0; display: block; overflow: hidden; } \n';
-            var head = document.querySelector('head');
-            head.insertBefore(style, head.firstChild);
-
-            cssref = document.createElement("link");
-            cssref.setAttribute("rel", "stylesheet");
-            cssref.setAttribute("type", "text/css");
-            cssref.setAttribute("id", "at-core-theme");
-            cssref.setAttribute("href", url);
-            cssref.setAttribute("shim-shadowdom", "");
-            document.getElementsByTagName("head")[0].appendChild(cssref);
-
+          // ensure that at-core-theme is first element in head, so that classes can still be overwritten as needed
+          var h = document.getElementsByTagName("head")[0];
+          if (!h.children.length) {
+            h.appendChild(cssref);
           } else {
-            cssref.setAttribute("href", url);
+            h.insertBefore(cssref, h.firstChild);
           }
 
-          console.log("theme changed to: " + this.theme);
-          window.CoreStyle.g.theme.name = this.theme;
+          // remove loading from body, now themed hides body until css is loaded
+          document.body.removeAttribute('loading');
+
+        } else {
+          cssref.setAttribute("href", url);
         }
 
-      });
+        console.log("theme changed to: " + this.theme);
+        window.CoreStyle.g.theme.name = this.theme;
+      }
 
-    })();
-  </script>
-</polymer-element>
+    });
+
+  })();
+</script>

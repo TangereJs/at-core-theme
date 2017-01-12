@@ -2,6 +2,11 @@
   "name": "at-core-theme",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#master"
-  }
+    "tangere": "TangereJs/tangere#master",
+    "at-doc-viewer": "TangereJs/at-doc-viewer#master",
+    "paper-button": "PolymerElements/paper-button#master",
+    "paper-checkbox": "PolymerElements/paper-checkbox#master",
+    "paper-fab": "PolymerElements/paper-fab#master"
+  },
+  "version": "0.0.1.29"
 }
