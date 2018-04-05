@@ -15,12 +15,6 @@ at-carbon-tabs#tabs {
   font-size: 18px;
 }
 
-#greetingContainer {
-  float: right;
-  margin-top: 13px;
-  font-size: 30px !important;
-  color: #666;
-}
 
 .wrapper.style-scope.at-carbon-tabs { 
   width: 350px;
