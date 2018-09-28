@@ -4,9 +4,9 @@
   "dependencies": {
     "tangere": "TangereJs/tangere#master",
     "at-doc-viewer": "TangereJs/at-doc-viewer#master",
-    "paper-button": "PolymerElements/paper-button#master",
-    "paper-checkbox": "PolymerElements/paper-checkbox#master",
-    "paper-fab": "PolymerElements/paper-fab#master"
+    "paper-button": "PolymerElements/paper-button#^2.0.0",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.0",
+    "paper-fab": "PolymerElements/paper-fab#^2.0.0"
   },
   "version": "0.0.1.78"
 }
