@@ -16,23 +16,23 @@ at-carbon-tabs#tabs {
 }
 
 
-.wrapper.style-scope.at-carbon-tabs { 
+.wrapper.style-scope.at-carbon-tabs {
   width: 350px;
 }
 
-at-carbon-tab.start-now { 
+at-carbon-tab.start-now {
   padding: 0 10px !important;
   margin: 0 10px !important;
   min-width: 100px;
 }
 
 /* Making search field have box shadow on focus */
-at-now-search#globalSearch:focus-within #searchBox { 
+at-now-search#globalSearch:focus-within #searchBox {
   box-shadow: 0px 0px 6px 0px #0088cc;
 }
 
 
-
-#tabsContainer.at-carbon-tabs {
-  margin-left: 0;
+at-core-card {
+  box-shadow: rgba(0, 0, 0, 0.098) 0px 2px 4px, rgba(0, 0, 0, 0.1) 0px 0px 3px !important;
+  border-radius: 0px !important;
 }
