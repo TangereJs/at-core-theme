@@ -396,6 +396,11 @@
 .at a {
   text-decoration: none;
 }
+
+.at a:-webkit-any-link {
+  color: inherit;
+}
+
 .at input[type="text"],
 .at input[type="email"],
 .at input[type="search"],
@@ -430,9 +435,3 @@
   */
 }
 
-
-
-/* fix chrome random default link colors*/
-a:-webkit-any-link {
-  color: inherit;
-}
